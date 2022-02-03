@@ -18,7 +18,7 @@ def add_group(update: Update, context: CallbackContext):
     msg = update.message
     for member in update.message.new_chat_members:
         update.message.reply_text(f'Hai {member.full_name} , Welcome to ln Support\n\n💖Thank💖You💖For💖Joining💖')
-        update.bot.delete_message(chat_id=msg.chat_id, message_id=msg.message_id)
+        context.bot.deleteMessage(chat_id=msg.chat_id, message_id=msg.message_id)
         sleep(500)
         update.bot.delete_message(chat_id=msg.chat_id, message_id=msg.message_id+1)
         
