@@ -15,6 +15,12 @@ def help(updater,context):
 def add_group(update: Update, context: CallbackContext):
     for member in update.message.new_chat_members:
         update.message.reply_text(f'Hai {member.full_name} , Welcome to ln Support\n\n💖Thank💖You💖For💖Joining💖')
+        sleep(500)
+        update.message.delete
+        bot.delete_message(chat_id=message.chat_id,
+                   message_id=message.message_id,
+                   *args,
+                   **kwargs)
 
 add_group_handle = MessageHandler(Filters.status_update.new_chat_members, add_group)
 updater.dispatcher.add_handler(add_group_handle)
