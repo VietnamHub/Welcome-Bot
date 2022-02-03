@@ -1,6 +1,8 @@
 from telegram import Update
 from telegram.ext import Updater , CommandHandler, CallbackQueryHandler, CallbackContext,Filters,MessageHandler
 import os
+from time import sleep
+
 
 Token =os.environ.get("BOT_TOKEN",None)
 updater = Updater( Token ,use_context = True )
@@ -13,11 +15,12 @@ def help(updater,context):
  
 
 def add_group(update: Update, context: CallbackContext):
+    msg = update.message
     for member in update.message.new_chat_members:
         update.message.reply_text(f'Hai {member.full_name} , Welcome to ln Support\n\n💖Thank💖You💖For💖Joining💖')
-        updater.bot.delete_message(chat_id=update.message.chat_id, message_id=update.message.message_id)
+        update.bot.delete_message(chat_id=msg.chat_id, message_id=msg.message_id)
         sleep(500)
-        updater.bot.delete_message(chat_id=update.message.chat_id, message_id=update.message.message_id+1)
+        update.bot.delete_message(chat_id=msg.chat_id, message_id=msg.message_id+1)
         
 add_group_handle = MessageHandler(Filters.status_update.new_chat_members, add_group)
 updater.dispatcher.add_handler(add_group_handle)
